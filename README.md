@@ -20,7 +20,3 @@ python src/04_models.py
 python src/05_evaluation.py
 python src/06_visualizations.py
 ```
-
-## 3. Rapport LaTeX
-- Copier `results/figures/*.png` dans `report/figures/`
-- Compiler : `cd report && pdflatex main.tex && pdflatex main.tex`
