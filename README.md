@@ -1,5 +1,5 @@
 # Text Mining — Analyse de Sentiment Twitter
-## DATA_INE2_2026 · Pr. EL ASRI Ikram
+## DATA_INE2_2026
 
 ## 1. Installation (CMD dans le dossier projet)
 ```
