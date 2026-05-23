@@ -1,0 +1,26 @@
+Ce projet a démontré l'efficacité d'un pipeline de Text Mining complet pour l'analyse de
+sentiment sur Twitter. Les contributions principales sont :
+
+\begin{itemize}
+  \item Un \textbf{prétraitement NLP adapté} aux spécificités des tweets (emojis, hashtags,
+        contractions) réduisant le bruit de 40\%.
+  \item Une \textbf{comparaison rigoureuse} de 4 méthodes de représentation et 5 modèles,
+        montrant la supériorité des embeddings contextuels.
+  \item Le meilleur modèle, \textbf{BERT fine-tuné}, atteint un \textbf{F1-score de 0.921},
+        niveau état de l'art sur cette tâche.
+\end{itemize}
+
+\subsection*{Perspectives d'amélioration}
+
+\begin{enumerate}
+  \item \textbf{Gestion du sarcasme} : intégrer un modèle de détection du sarcasme en amont.
+  \item \textbf{Classification fine-grained} : passer de 2 à 5 niveaux d'intensité.
+  \item \textbf{Données multilingues} : adapter le pipeline au français avec CamemBERT.
+  \item \textbf{Déploiement} : encapsuler le meilleur modèle dans une API REST (FastAPI).
+\end{enumerate}
+
+\begin{resultbox}[Résultat clé]
+BERT fine-tuné sur seulement 20\,000 tweets atteint \textbf{F1 = 0.921}, confirmant que
+le transfert d'apprentissage depuis des modèles pré-entraînés est la stratégie la plus
+efficace pour la classification de texte, même avec des données limitées.
+\end{resultbox}

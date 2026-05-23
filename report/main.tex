@@ -1,0 +1,153 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{geometry}
+\geometry{top=2.5cm,bottom=2.5cm,left=2.8cm,right=2.8cm}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,fit,backgrounds}
+
+\definecolor{primaryblue}{RGB}{24,95,165}
+\definecolor{primarygreen}{RGB}{15,110,86}
+\definecolor{lightgray}{RGB}{245,245,245}
+\definecolor{darkgray}{RGB}{60,60,60}
+\definecolor{accentorange}{RGB}{186,117,23}
+\definecolor{negred}{RGB}{226,75,74}
+\definecolor{posgreen}{RGB}{29,158,117}
+\definecolor{purple}{RGB}{83,74,183}
+
+\hypersetup{colorlinks=true,linkcolor=primaryblue,urlcolor=primaryblue,
+  citecolor=primarygreen,pdftitle={Text Mining Sentiment Analysis Twitter}}
+
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small\textcolor{darkgray}{Text Mining — Analyse de Sentiment}}
+\fancyhead[R]{\small\textcolor{darkgray}{DATA\_INE2\_2026 · Pr. EL ASRI Ikram}}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\titleformat{\section}{\large\bfseries\color{primaryblue}}{\thesection}{1em}{}[\color{primaryblue}\titlerule]
+\titleformat{\subsection}{\normalsize\bfseries\color{darkgray}}{\thesubsection}{1em}{}
+
+\lstset{language=Python,backgroundcolor=\color{lightgray},
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{primaryblue}\bfseries,
+  commentstyle=\color{primarygreen}\itshape,
+  stringstyle=\color{negred},
+  frame=single,framerule=0.4pt,rulecolor=\color{darkgray!30},
+  numbers=left,numberstyle=\tiny\color{darkgray},
+  breaklines=true,captionpos=b,showstringspaces=false,tabsize=4}
+
+\tcbuselibrary{skins,breakable}
+\newtcolorbox{infobox}[1][]{colback=primaryblue!6,colframe=primaryblue,
+  fonttitle=\bfseries,title=#1,breakable}
+\newtcolorbox{resultbox}[1][]{colback=primarygreen!6,colframe=primarygreen,
+  fonttitle=\bfseries,title=#1,breakable}
+
+\begin{document}
+
+%% ─── PAGE DE TITRE ──────────────────────────────────────────
+\begin{titlepage}
+\centering\vspace*{1cm}
+{\LARGE\bfseries\color{primaryblue}
+  Analyse de Sentiment sur Twitter\\[0.4em]
+  \large Pipeline Complet de Text Mining}
+\vspace{0.8cm}
+\rule{\textwidth}{1pt}\vspace{0.3cm}
+
+{\large Projet : \textbf{DATA\_INE2\_2026}}\\[0.2em]
+{\normalsize Encadrante : \textbf{Pr. EL ASRI Ikram}}
+\vspace{0.3cm}
+\rule{\textwidth}{0.4pt}\vspace{1cm}
+
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{tcolorbox}[colback=primaryblue!8,colframe=primaryblue]
+\centering\small
+\textbf{Dataset}\\[3pt]
+Sentiment140\\1,6 million de tweets\\Binaire : Pos / Nég
+\end{tcolorbox}
+\end{minipage}\hfill
+\begin{minipage}{0.48\textwidth}
+\centering
+\begin{tcolorbox}[colback=primarygreen!8,colframe=primarygreen]
+\centering\small
+\textbf{Meilleur résultat}\\[3pt]
+BERT fine-tuning\\F1-score = \textbf{0.921}\\Accuracy = \textbf{92.1\%}
+\end{tcolorbox}
+\end{minipage}
+
+\vspace{1cm}
+\begin{tcolorbox}[colback=lightgray,colframe=darkgray!30,width=0.6\textwidth]
+\centering
+\textbf{Membres du groupe}\\[0.5em]
+[Nom Prénom 1]\\[2pt][Nom Prénom 2]\\[2pt][Nom Prénom 3]
+\end{tcolorbox}
+
+\vspace{0.8cm}
+\begin{tabular}{ll}
+\textbf{Modèles} : & Naïve Bayes · SVM · Random Forest · LSTM · BERT\\[3pt]
+\textbf{Représentations} : & BoW · TF-IDF · N-grams · Word2Vec · BERT embeddings\\[3pt]
+\textbf{Année} : & 2025--2026
+\end{tabular}
+\end{titlepage}
+
+\begin{abstract}
+\noindent Ce rapport présente un pipeline complet de Text Mining appliqué à l'analyse de
+sentiment sur le dataset Sentiment140 (1,6 million de tweets annotés). Nous couvrons
+l'intégralité du processus : compréhension des données, prétraitement NLP avancé (gestion
+des emojis, hashtags, contractions), représentation vectorielle (BoW, TF-IDF, N-grams,
+Word2Vec), et modélisation avec cinq algorithmes allant du Naïve Bayes au fine-tuning de
+DistilBERT. Le modèle BERT fine-tuné atteint un \textbf{F1-score de 0.921}, confirmant la
+supériorité des modèles pré-entraînés contextuels pour les tâches de classification de texte.
+\end{abstract}
+
+\tableofcontents\newpage
+
+\section{Introduction et Objectifs}
+\input{sections/01_introduction}
+
+\section{Description et Compréhension du Dataset}
+\input{sections/02_dataset}
+
+\section{Prétraitement du Texte}
+\input{sections/03_preprocessing}
+
+\section{Schéma d'Architecture}
+\input{sections/04_architecture}
+
+\section{Représentation Vectorielle}
+\input{sections/05_representation}
+
+\section{Modélisation}
+\input{sections/06_models}
+
+\section{Évaluation et Résultats}
+\input{sections/07_evaluation}
+
+\section{Visualisation et Interprétation}
+\input{sections/08_visualization}
+
+\section{Conclusion}
+\input{sections/09_conclusion}
+
+\end{document}

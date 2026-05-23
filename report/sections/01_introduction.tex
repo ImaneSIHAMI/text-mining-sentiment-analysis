@@ -1,0 +1,18 @@
+L'analyse de sentiment est une tâche fondamentale du traitement automatique du langage naturel (TALN).
+Elle consiste à identifier la polarité émotionnelle exprimée dans un texte (positif, négatif, neutre).
+Avec l'essor de Twitter, des millions de messages sont produits chaque jour, constituant une source
+précieuse d'opinion publique.
+
+Ce projet applique un pipeline complet de Text Mining sur des données Twitter réelles :
+
+\begin{enumerate}[leftmargin=*,label=\arabic*.]
+  \item \textbf{Collecte et compréhension des données} : analyse exploratoire du corpus Sentiment140.
+  \item \textbf{Prétraitement NLP} : nettoyage, tokenisation, gestion des spécificités des tweets (emojis, hashtags).
+  \item \textbf{Représentation vectorielle} : BoW, TF-IDF, N-grams, Word2Vec.
+  \item \textbf{Modélisation} : comparaison de cinq modèles (Naïve Bayes, SVM, Random Forest, LSTM, BERT).
+  \item \textbf{Évaluation et interprétation} : métriques, matrices de confusion, analyse d'erreurs.
+\end{enumerate}
+
+\begin{infobox}[Tâche de classification]
+Étant donné un tweet $t$, prédire sa polarité $y \in \{0, 1\}$ où $0$ = sentiment négatif et $1$ = sentiment positif.
+\end{infobox}

@@ -1,0 +1,64 @@
+La figure~\ref{fig:architecture} présente le schéma global du pipeline de Text Mining développé
+dans ce projet, depuis les données brutes jusqu'aux résultats finaux.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+  node distance=0.55cm and 0.3cm,
+  box/.style={rectangle,rounded corners=4pt,minimum width=2.9cm,minimum height=0.85cm,
+    draw,thick,align=center,font=\small},
+  databox/.style={box,fill=primaryblue!12,draw=primaryblue},
+  prepbox/.style={box,fill=primarygreen!12,draw=primarygreen},
+  reprbox/.style={box,fill=accentorange!15,draw=accentorange},
+  modelbox/.style={box,fill=negred!10,draw=negred},
+  evalbox/.style={box,fill=posgreen!12,draw=posgreen},
+  arrow/.style={-Stealth,thick,gray!60},
+  lbl/.style={font=\scriptsize\itshape,text=darkgray}
+]
+\node[databox] (raw)  {Données brutes\\(1.6M tweets)};
+\node[databox,below=of raw] (eda)  {Analyse\\exploratoire};
+
+\node[prepbox,right=1.1cm of raw]  (clean) {Nettoyage\\(URL,@,\#,emojis)};
+\node[prepbox,below=of clean] (tok)   {Tokenisation};
+\node[prepbox,below=of tok]   (stop)  {Stopwords\\+ Lemmatisation};
+
+\node[reprbox,right=1.1cm of clean] (bow)   {BoW};
+\node[reprbox,below=of bow]   (tfidf) {TF-IDF\\+ N-grams};
+\node[reprbox,below=of tfidf] (w2v)   {Word2Vec};
+\node[reprbox,below=of w2v]   (bert_e){BERT\\embeddings};
+
+\node[modelbox,right=1.1cm of bow]   (nb)   {Naïve Bayes};
+\node[modelbox,below=of nb]    (svm)  {SVM};
+\node[modelbox,below=of svm]   (rf)   {Random Forest};
+\node[modelbox,below=of rf]    (lstm) {LSTM Bi.};
+\node[modelbox,below=of lstm]  (bert) {BERT\\fine-tuning};
+
+\node[evalbox,right=1.1cm of svm]  (eval) {Évaluation\\F1·Acc·CM};
+\node[evalbox,below=of eval]  (viz)  {Visualisation\\WordCloud·t-SNE};
+\node[evalbox,below=of viz]   (out)  {\textbf{Résultats}\\BERT F1=0.921};
+
+\draw[arrow](raw)--(clean); \draw[arrow](eda)--(tok);
+\draw[arrow](clean)--(tok); \draw[arrow](tok)--(stop);
+\draw[arrow](stop)--(bow);  \draw[arrow](stop)--(tfidf);
+\draw[arrow](stop)--(w2v);  \draw[arrow](stop)--(bert_e);
+\draw[arrow](bow)--(nb);    \draw[arrow](tfidf)--(nb);
+\draw[arrow](tfidf)--(svm); \draw[arrow](tfidf)--(rf);
+\draw[arrow](w2v)--(lstm);  \draw[arrow](bert_e)--(bert);
+\draw[arrow](nb)--(eval);   \draw[arrow](svm)--(eval);
+\draw[arrow](rf)--(eval);   \draw[arrow](lstm)--(eval);
+\draw[arrow](bert)--(eval); \draw[arrow](eval)--(viz);
+\draw[arrow](viz)--(out);
+
+\node[lbl,above=0.25cm of raw]   {(1) Données};
+\node[lbl,above=0.25cm of clean] {(2) Prétraitement};
+\node[lbl,above=0.25cm of bow]   {(3) Représentation};
+\node[lbl,above=0.25cm of nb]    {(4) Modèles};
+\node[lbl,above=0.25cm of eval]  {(5) Évaluation};
+\end{tikzpicture}
+\caption{Architecture globale du pipeline de Text Mining}
+\label{fig:architecture}
+\end{figure}
+
+Le pipeline suit une organisation strictement séquentielle. Les données brutes sont nettoyées
+puis transformées en représentations numériques adaptées à chaque famille de modèles.
+La phase d'évaluation compare objectivement toutes les approches.

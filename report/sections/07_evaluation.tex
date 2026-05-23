@@ -1,0 +1,72 @@
+\subsection{Métriques utilisées}
+
+\begin{align}
+  \text{Précision} &= \frac{TP}{TP+FP} &
+  \text{Rappel}    &= \frac{TP}{TP+FN} \\[0.5em]
+  F_1 &= 2\cdot\frac{\text{Précision}\times\text{Rappel}}{\text{Précision}+\text{Rappel}} &
+  \text{Accuracy}  &= \frac{TP+TN}{TP+TN+FP+FN}
+\end{align}
+
+\subsection{Tableau comparatif des résultats}
+
+\begin{table}[H]
+\centering
+\caption{Comparaison des performances sur l'ensemble de test}
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Modèle} & \textbf{Repr.} & \textbf{Acc.} & \textbf{Précision} & \textbf{Rappel} & \textbf{F1} \\
+\midrule
+Naïve Bayes    & TF-IDF   & 0.774 & 0.776 & 0.774 & 0.775 \\
+SVM            & TF-IDF   & 0.832 & 0.833 & 0.832 & 0.832 \\
+Random Forest  & N-grams  & 0.812 & 0.814 & 0.812 & 0.813 \\
+LSTM Bi.       & Word2Vec & 0.858 & 0.859 & 0.858 & 0.858 \\
+\rowcolor{primarygreen!15}
+\textbf{BERT}  & \textbf{BERT emb.} & \textbf{0.921} & \textbf{0.922} & \textbf{0.921} & \textbf{0.921} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Matrices de confusion}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/05_confusion_matrices.png}
+\caption{Matrices de confusion des 5 modèles (pourcentage par classe réelle + valeurs absolues).}
+\label{fig:cm}
+\end{figure}
+
+\subsection{Comparaison des métriques}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{figures/05_metrics_comparison.png}
+\caption{Comparaison des métriques Accuracy, F1-score, F1 par classe pour tous les modèles.}
+\label{fig:metrics}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/05_metrics_heatmap.png}
+\caption{Heatmap récapitulative de toutes les métriques par modèle.}
+\label{fig:heatmap_eval}
+\end{figure}
+
+\subsection{Discussion des résultats}
+
+\begin{resultbox}[Principaux enseignements]
+\begin{itemize}
+  \item \textbf{BERT domine} avec F1=0.921, grâce aux représentations contextuelles pré-entraînées.
+  \item \textbf{SVM} est le meilleur modèle classique (F1=0.832), très compétitif pour sa simplicité.
+  \item \textbf{LSTM} montre la valeur des architectures séquentielles (F1=0.858).
+  \item \textbf{Naïve Bayes} reste utile comme baseline rapide (F1=0.775, entraînement en secondes).
+  \item Progression claire : NB $<$ RF $<$ SVM $<$ LSTM $<$ BERT.
+\end{itemize}
+\end{resultbox}
+
+\subsection{Analyse d'erreurs}
+
+L'analyse des exemples mal classifiés par BERT révèle deux catégories principales :
+\begin{itemize}
+  \item \textbf{Sarcasme/ironie} : \textit{"Oh great, another Monday..."} prédit positif à cause de ``great''.
+  \item \textbf{Ambiguïté contextuelle} : tweets très courts sans indicateur de sentiment clair.
+\end{itemize}

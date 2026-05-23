@@ -1,0 +1,17 @@
+numpy
+pandas
+scikit-learn
+matplotlib
+seaborn
+wordcloud
+nltk
+gensim
+tensorflow
+transformers
+datasets
+accelerate
+emoji==1.7.0
+contractions
+tqdm
+scipy
+jupyter

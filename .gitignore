@@ -1,0 +1,15 @@
+venv/
+__pycache__/
+data/*.csv
+data/*.npy
+data/*.npz
+data/*.pkl
+data/*.model
+data/model_bert/
+data/model_lstm.keras
+data/results.json
+results/figures/*.png
+report/*.pdf
+*.aux *.log *.out *.toc *.synctex.gz
+.DS_Store
+Thumbs.db
