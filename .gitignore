@@ -13,3 +13,7 @@ report/*.pdf
 *.aux *.log *.out *.toc *.synctex.gz
 .DS_Store
 Thumbs.db
+data/model_roberta/model.safetensors 
+data/model_bert/ 
+data/model_lstm.pt 
+data/model_lstm_best.pt 
